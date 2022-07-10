@@ -1,0 +1,16 @@
+
+DubboBootstrapApplicationListener#onContextRefreshedEvent
+    DubboBootstrap#start
+        exportServices
+            foreach ServiceBean export (ServiceBean extends ServiceConfig)
+                ServiceConfig#doExportUrls
+                    #doExportUrlsFor1Protocol
+                        URL url = new URL()
+                        export injvm
+                        export service with registry center
+                            RegistryProtocol#export
+                                doLocalExport
+                                    SPI DubboProtocol#export
+                                        openServer(Netty Server)
+                                register
+                                    SPI NacosRegistry#doRegister
